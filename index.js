@@ -72,21 +72,7 @@ module.exports = {
 
   reduceUI(state, action) {
     if (action.type === 'PREFERS_COLOR_SCHEME_CHANGE') {
-      console.log('PREFERS_COLOR_SCHEME_CHANGE', action);
       const theme = window.themes[action.isDarkMode ? 'darkTheme' : 'lightTheme'];
-      console.table({
-        foregroundColor: theme?.foregroundColor ?? config.foregroundColor,
-        backgroundColor: theme?.backgroundColor ?? config.backgroundColor,
-        borderColor: theme?.borderColor ?? config.borderColor,
-        colors: theme?.colors ?? config.colors,
-        cursorColor: theme?.cursorColor ?? config.cursorColor,
-        selectionColor: theme?.selectionColor ?? config.selectionColor,
-        fontSize: theme?.fontSize ?? config.fontSize,
-        fontFamily: theme?.fontFamily ?? config.fontFamily,
-        css: theme?.css ?? config.css,
-        termCSS: theme?.termCSS ?? config.termCSS,
-        cursorShape: theme?.cursorShape ?? config.cursorShape,
-      });
 
       return (
         state
