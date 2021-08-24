@@ -6,9 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name" : "Tom Bremer",
+    "email" : "tom@tbremer.com",
+    "url" : "https://tbremer.dev"
+  },
+  "license": "MIT",
   "devDependencies": {
     "prettier": "^2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tbremer/hyper-prefers-color-scheme/.git"
   }
 }
