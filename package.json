@@ -1,6 +1,6 @@
 {
   "name": "hyper-prefers-color-scheme",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Adds the ability to have different Light and Dark themes based on the user's OS theme.",
   "main": "index.js",
   "scripts": {
