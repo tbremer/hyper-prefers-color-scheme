@@ -1,15 +1,15 @@
 {
   "name": "hyper-prefers-color-scheme",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Adds the ability to have different Light and Dark themes based on the user's OS theme.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
-    "name" : "Tom Bremer",
-    "email" : "tom@tbremer.com",
-    "url" : "https://tbremer.dev"
+    "name": "Tom Bremer",
+    "email": "tom@tbremer.com",
+    "url": "https://tbremer.dev"
   },
   "license": "MIT",
   "devDependencies": {
