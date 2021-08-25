@@ -15,8 +15,11 @@
   "devDependencies": {
     "prettier": "^2.3.2"
   },
+  "bugs": {
+    "url": "https://github.com/tbremer/hyper-prefers-color-scheme/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tbremer/hyper-prefers-color-scheme/.git"
+    "url": "https://github.com/tbremer/hyper-prefers-color-scheme.git"
   }
 }
