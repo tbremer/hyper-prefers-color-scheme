@@ -21,7 +21,6 @@ module.exports = {
       light: "hyper-papercolor",
       dark: "hyper-oceans16"
     },
-    ...
     // your config setup
   },
   plugins: [
