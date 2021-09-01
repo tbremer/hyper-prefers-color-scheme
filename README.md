@@ -10,12 +10,12 @@ Add `hyper-prefers-color-scheme` to the plugins array in your ~/.hyper.js config
 
 ## Confgure
 
-In your `.hyper.js` config you will need to add a new field `hyperPrefersColorScheme` with two keys `light` & `dark`. Those keys will need to be color schemes that you have installed in your `plugins` array.
+In your `.hyper.js` configuration file you will need to add a new field to the `config` object, `hyperPrefersColorScheme` with two keys `light` & `dark`. Those keys will need to be color schemes that you have installed in your `plugins` array.
 
 ### Example `.hyper.js`
 
-```
-{
+```javascript
+module.exports = {
   config: {
     hyperPrefersColorScheme: {
       light: "hyper-papercolor",
