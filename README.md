@@ -16,9 +16,13 @@ In your `.hyper.js` config you will need to add a new field `hyperPrefersColorSc
 
 ```
 {
-  hyperPrefersColorScheme: {
-    light: "hyper-papercolor",
-    dark: "hyper-oceans16"
+  config: {
+    hyperPrefersColorScheme: {
+      light: "hyper-papercolor",
+      dark: "hyper-oceans16"
+    },
+    ...
+    // your config setup
   },
   plugins: [
     "hyper-papercolor",
