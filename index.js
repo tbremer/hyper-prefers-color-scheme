@@ -12,17 +12,24 @@ function getThemeObj(themePath, config) {
   return theme;
 }
 
+function getConfigFromObject(hyperConfig) {
+  if ('hyperPreferColorScheme' in hyperConfig) return hyperConfig.hyperPreferColorScheme;
+  if ('hyperPrefersColorScheme' in hyperConfig) return hyperConfig.hyperPrefersColorScheme;
+
+  throw new Error('Unable to find `hyperPrefersColorScheme` within config object.');
+}
+
 const getDefinedThemes = (() => {
   let themes = null;
   return (pluginsWithPaths, config) => {
     if (themes) return themes;
-    const { hyperPreferColorScheme } = config;
+    const colorSchemeObject = getConfigFromObject(config);
     const pathMap = pluginsWithPaths.plugins.reduce(
       (map, cur) => {
-        if (cur.endsWith(hyperPreferColorScheme.light)) {
+        if (cur.endsWith(colorSchemeObject.light)) {
           map.light = cur;
         }
-        if (cur.endsWith(hyperPreferColorScheme.dark)) {
+        if (cur.endsWith(colorSchemeObject.dark)) {
           map.dark = cur;
         }
 
@@ -44,21 +51,16 @@ const getDefinedThemes = (() => {
 
 module.exports = {
   middleware: (store) => (next) => (action) => {
+    // Once Electron sets the themes and `hasSetTheme` is toggled we need to start listening for color scheme changes
     if (window.themes && window.hasSetTheme === false) {
-      const mql = window.matchMedia('(prefers-color-scheme: dark)');
-      window.hasSetTheme = true;
-
-      mql.addEventListener('change', (evt) => {
+      window.rpc.on('hyperPrefersColorScheme:toggle', (isDarkMode) => {
         store.dispatch({
           type: 'PREFERS_COLOR_SCHEME_CHANGE',
-          isDarkMode: evt.matches,
+          isDarkMode,
         });
       });
 
-      store.dispatch({
-        type: 'PREFERS_COLOR_SCHEME_CHANGE',
-        isDarkMode: mql.matches,
-      });
+      window.hasSetTheme = true;
     }
 
     return next(action);
@@ -67,7 +69,15 @@ module.exports = {
   onWindow(window) {
     const themes = getDefinedThemes(electron.app.plugins.getPaths(), electron.app.config.getConfig());
 
-    window.webContents.executeJavaScript(`window.themes=${JSON.stringify(themes)};window.hasSetTheme=false`);
+    window.webContents
+      .executeJavaScript(`window.themes=${JSON.stringify(themes)};window.hasSetTheme=false`)
+      .then(() => {
+        window.rpc.emit('hyperPrefersColorScheme:toggle', electron.nativeTheme.shouldUseDarkColors);
+      });
+
+    electron.nativeTheme.on('updated', () => {
+      window.rpc.emit('hyperPrefersColorScheme:toggle', electron.nativeTheme.shouldUseDarkColors);
+    });
   },
 
   reduceUI(state, action) {
