@@ -6,7 +6,7 @@ Allow for two color schemes for Light and Dark mode when your OS switches themes
 
 ## Install
 
-Add `hyper-prefers-color-scheme` to the plugins array in your ~/.hyper.js config, or run `hyper -i hyper-prefers-color-scheme`.
+Add `hyper-prefers-color-scheme` to the plugins array in your ~/.hyper.js config, or run `hyper i hyper-prefers-color-scheme`.
 
 ## Confgure
 
